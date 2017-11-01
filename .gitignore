@@ -20,9 +20,6 @@ jspm_packages
 .skyuxtmp
 .srctmp
 
-# SKY UX build directory
-dist
-
 # OS specific files
 .DS_Store
 

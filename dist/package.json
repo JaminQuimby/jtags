@@ -1,0 +1,29 @@
+{
+  "name": "blackbaud-skyux-lib-j-tags",
+  "version": "1.0.0",
+  "description": "Single-page-application for skyux-lib-j-tags",
+  "main": "bundles/bundle.umd.js",
+  "module": "index.js",
+  "engines": {
+    "node": ">=6.11.1"
+  },
+  "scripts": {
+    "skyux": "skyux",
+    "test": "skyux test && skyux e2e && skyux build && npm run build",
+    "build": "skyux build-public-library",
+    "start": "skyux serve"
+  },
+  "keywords": [],
+  "author": "Blackbaud",
+  "license": "ISC",
+  "dependencies": {
+    "@blackbaud/skyux": "2.3.2"
+  },
+  "devDependencies": {
+    "@blackbaud/skyux-builder": "1.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  }
+}
