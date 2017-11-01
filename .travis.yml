@@ -20,6 +20,8 @@ before_install:
 - sudo dpkg -i google-chrome*.deb
 - rm google-chrome*.deb
 - npm install -g @blackbaud/skyux-cli
+before_deploy:
+  - cd dist
 deploy:
   provider: npm
   email: jaminquimby@hotmail.com
