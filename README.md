@@ -1,6 +1,6 @@
-# skyux-template-library
+### SKY UX library jTags
+![Build](https://travis-ci.org/JaminQuimby/jtags.svg?branch=master)
 
-### Template for SKY UX component libraries
 
 ## Getting Started
 - Add modules to **/src/app/public/src/modules**. (There is a sample module already created for you.) It is good practice to prefix every module, component, and provider you create. In this case, `Library` serves as the prefix. You can use a different prefix, as long as it is consistent (for example, `StacheModule`).
