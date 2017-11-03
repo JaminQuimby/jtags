@@ -39,7 +39,5 @@ describe('JTagsComponent', () => {
   it('should output the name from config', () => {
     fixture.detectChanges();
     expect(fixture).toExist();
-    expect(component.service.skyux.name).toBe('test');
-    expect(component.service.skyux.appSettings.myLibrary.name).toBe('library');
   });
 });
