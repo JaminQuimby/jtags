@@ -1,5 +1,5 @@
 {
-  "name": "blackbaud-skyux-lib-j-tags",
+  "name": "skyux-lib-j-tags",
   "version": "1.0.0",
   "description": "Single-page-application for skyux-lib-j-tags",
   "main": "bundles/bundle.umd.js",
