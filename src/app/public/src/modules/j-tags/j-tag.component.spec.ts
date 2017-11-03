@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
 
 import { JTagComponent } from './j-tag.component';
-import { LibraryConfigService } from '../shared';
+import { JTagService } from './j-tag.service';
 
 class MockSkyAppConfig {
   public runtime: any = {};
@@ -27,7 +27,7 @@ describe('JTagsComponent', () => {
         JTagComponent
       ],
       providers: [
-        { provide: LibraryConfigService, useClass: MockSkyAppConfig }
+        { provide: JTagService, useClass: MockSkyAppConfig }
       ]
     })
     .compileComponents();
