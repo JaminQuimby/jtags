@@ -1,14 +1,10 @@
 import { NgModule } from '@angular/core';
 
-import { LibrarySampleModule } from './modules/sample';
-import { LibrarySharedModule } from './modules/shared';
 import { JTagModule } from './modules/j-tags';
-export * from './modules/shared';
 
+export * from './modules/j-tags';
 @NgModule({
   exports: [
-    LibrarySampleModule,
-    LibrarySharedModule,
     JTagModule
   ]
 })
