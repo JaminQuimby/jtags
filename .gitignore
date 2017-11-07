@@ -20,6 +20,9 @@ jspm_packages
 .skyuxtmp
 .srctmp
 
+# Buid directory
+dist
+
 # OS specific files
 .DS_Store
 
