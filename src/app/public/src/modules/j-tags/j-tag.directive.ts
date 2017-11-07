@@ -40,7 +40,7 @@ const SKY_JTAG_VALIDATOR = {
 };
 // tslint:enable
 @Directive({
-  selector: '[jtagInput]',
+  selector: '[jTagInput]',
   providers: [
     SKY_JTAG_VALUE_ACCESSOR,
     SKY_JTAG_VALIDATOR
