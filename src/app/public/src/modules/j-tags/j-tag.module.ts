@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { JTagComponent } from './j-tag.component';
 import { JTagInputDirective } from './j-tag.directive';
+
 @NgModule({
   declarations: [
     JTagComponent,

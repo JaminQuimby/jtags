@@ -7,5 +7,10 @@
     Demo:
   </h3>
 
-  <j-tag></j-tag>
+
+    <j-tag #jtag>
+      <input
+      [(ngModel)]="jtagModel"
+      [jtagInput]="jtag"/>
+    </j-tag>
 </div>
