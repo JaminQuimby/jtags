@@ -1,0 +1,24 @@
+j-tag {
+    @include tag-theme($default-tag-theme);
+}
+
+.minimal j-tag {
+    @include tag-theme($minimal-tag-theme);
+}
+
+.dark j-tag {
+    @include tag-theme($dark-tag-theme);
+}
+
+.bootstrap j-tag {
+    @include tag-theme($bootstrap-tag-theme);
+}
+
+.bootstrap3-info j-tag {
+    @include tag-theme($bootstrap3-info-tag-theme);
+
+    padding: .25em .6em;
+
+    text-align: center;
+    white-space: nowrap;
+}
