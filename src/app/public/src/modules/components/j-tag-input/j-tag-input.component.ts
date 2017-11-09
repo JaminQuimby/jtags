@@ -31,9 +31,9 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 
-// ng2-tag-input
+// j-tag-input
 import {
-    TagInputAccessor,
+    JTagInputAccessor,
     JTagModel,
     listen,
     constants
@@ -72,8 +72,13 @@ const defaults: Type<JTagInputOptions> = forwardRef(() => OptionsProvider.defaul
     templateUrl: './j-tag-input.template.html',
     animations
 })
-export class JTagInputComponent extends TagInputAccessor implements OnInit, AfterViewInit {
-
+export class JTagInputComponent extends JTagInputAccessor implements OnInit, AfterViewInit {
+    @ContentChildren(TemplateRef, { descendants: false })
+    public templates: QueryList<TemplateRef<any>>;
+// tslint:disable
+    @ViewChild(forwardRef(() => JTagInputFormComponent))
+    public inputForm: JTagInputFormComponent;
+// tslint:enable
     @Input() public separatorKeys: string[] = new defaults().separatorKeys;
     @Input() public separatorKeyCodes: number[] = new defaults().separatorKeyCodes;
     @Input() public placeholder: string = new defaults().placeholder;
@@ -116,10 +121,6 @@ export class JTagInputComponent extends TagInputAccessor implements OnInit, Afte
     @Output() public onValidationError = new EventEmitter<JTagModel>();
     @Output() public onTagEdited = new EventEmitter<JTagModel>();
 
-    @ContentChildren(TemplateRef, { descendants: false }) public templates: QueryList<TemplateRef<any>>;
-
-    @ViewChild(JTagInputFormComponent) public inputForm: JTagInputFormComponent;
-
     public selectedTag: JTagModel | undefined;
     public isLoading = false;
     public set inputText(text: string) {
@@ -127,7 +128,8 @@ export class JTagInputComponent extends TagInputAccessor implements OnInit, Afte
         this.inputTextChange.emit(text);
     }
 
-    @ViewChildren(JTagComponent) public tags: QueryList<JTagComponent>;
+    @ViewChildren(JTagComponent)
+    public tags: QueryList<JTagComponent>;
 
     @Output() public inputTextChange: EventEmitter<string> = new EventEmitter();
 

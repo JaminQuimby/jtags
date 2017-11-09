@@ -12,7 +12,7 @@ import { Subject } from 'rxjs/Subject';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // import { JTagModel } from '../../core';
-import { JTagInputComponent } from './j-tag-input';
+import { JTagInputComponent } from './j-tag-input.component';
 
 import {
     BasicJTagInputComponent,
@@ -397,18 +397,6 @@ describe('JTagInputComponent', () => {
     describe('when using the autocomplete', () => {
         let keyUp: Event = new Event('keyUp');
         (<any>keyUp)['keyCode'] = 73;
-
-        it('adds an autocomplete to the template', fakeAsync(() => {
-            const fixture: ComponentFixture<JTagInputComponentWithAutocomplete> =
-                TestBed.createComponent(JTagInputComponentWithAutocomplete);
-
-            const component = getComponent(fixture);
-
-            expect(component.dropdown.autocompleteItems.length).toEqual(3);
-            expect(document.querySelector('ng2-dropdown-menu')).toBeTruthy();
-
-            discardPeriodicTasks();
-        }));
 
         it('shows a dropdown when entering a matching value', fakeAsync(() => {
             const fixture: ComponentFixture<JTagInputComponentWithAutocomplete> =

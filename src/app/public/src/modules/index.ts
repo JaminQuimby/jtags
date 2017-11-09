@@ -1,2 +1,2 @@
-export * from './j-tag-input.module';
 export * from './components';
+export * from './core';

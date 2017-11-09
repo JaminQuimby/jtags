@@ -40,7 +40,7 @@ const SKY_JTAG_VALIDATOR = {
 };
 // tslint:enable
 @Directive({
-  selector: '[jTagInput]',
+  selector: '[jTagInputData]',
   providers: [
     SKY_JTAG_VALUE_ACCESSOR,
     SKY_JTAG_VALIDATOR
@@ -52,7 +52,7 @@ export class JTagDemoInputDirective implements
   public pickerChangedSubscription: Subscription;
 
   @Input()
-  public jTagInput: JTagDemoComponent;
+  public jTagInputData: JTagDemoComponent;
 
   @Input()
   public returnFormat: string;
@@ -115,7 +115,7 @@ export class JTagDemoInputDirective implements
       /* istanbul ignore next */
       this.renderer.setElementProperty(this.elRef.nativeElement, 'value', setElementValue);
     }
-    this.jTagInput.selectedTags = model;
+    this.jTagInputData.selectedTags = model;
   }
 
   /*istanbul ignore next */

@@ -14,7 +14,7 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 
-import { JTagInputModule } from '../../../j-tag-input.module';
+import { JTagInputModule } from '../j-tag-input.module';
 
 function getItems() {
     return ['Javascript', 'Typescript'];
@@ -31,7 +31,7 @@ const validators = [Validators.minLength(3), (control: FormControl) => {
 
 @Component({
     selector: 'test-app',
-    template: `<tag-input [(ngModel)]="items"></tag-input>`
+    template: `<j-tag-input [(ngModel)]="items"></j-tag-input>`
 })
 export class BasicJTagInputComponent {
     public items = getItems();
@@ -39,11 +39,11 @@ export class BasicJTagInputComponent {
 
 @Component({
     selector: 'test-app',
-    template: `<tag-input
+    template: `<j-tag-input
                   [(ngModel)]="items"
                   (onRemove)="onRemove($event)"
                   (onAdd)="onAdd($event)">
-              </tag-input>`
+              </j-tag-input>`
 })
 /* tslint:disable */
 export class JTagInputComponentWithOutputs {
@@ -57,7 +57,7 @@ export class JTagInputComponentWithOutputs {
 
 @Component({
     selector: 'test-app',
-    template: `<tag-input [(ngModel)]="items"></tag-input>`
+    template: `<j-tag-input [(ngModel)]="items"></j-tag-input>`
 })
 /* tslint:disable */
 export class JTagInputComponentTagsAsObjects {
@@ -67,7 +67,7 @@ export class JTagInputComponentTagsAsObjects {
 
 @Component({
     selector: 'test-app',
-    template: `<tag-input [(ngModel)]="items"></tag-input>`
+    template: `<j-tag-input [(ngModel)]="items"></j-tag-input>`
 })
 /* tslint:disable */
 export class JTagInputComponentCustomTagsAsObjects {
@@ -77,10 +77,10 @@ export class JTagInputComponentCustomTagsAsObjects {
 
 @Component({
     selector: 'test-app',
-    template: `<tag-input
+    template: `<j-tag-input
                   [(ngModel)]="items"
                   [validators]="validators">
-              </tag-input>`
+              </j-tag-input>`
 })
 /* tslint:disable */
 export class JTagInputComponentWithValidation {
@@ -91,9 +91,9 @@ export class JTagInputComponentWithValidation {
 
 @Component({
     selector: 'test-app',
-    template: `<tag-input [(ngModel)]="items"
+    template: `<j-tag-input [(ngModel)]="items"
                           [onAdding]="onAdding">
-                         </tag-input>`
+                         </j-tag-input>`
 })
 /* tslint:disable */
 export class JTagInputComponentWithTransformer {
@@ -108,7 +108,7 @@ export class JTagInputComponentWithTransformer {
 
 @Component({
     selector: 'test-app',
-    template: `<tag-input [(ngModel)]="items" [placeholder]="'New Tag'"></tag-input>`
+    template: `<j-tag-input [(ngModel)]="items" [placeholder]="'New Tag'"></j-tag-input>`
 })
 /* tslint:disable */
 export class JTagInputComponentWithPlaceholder {
@@ -118,7 +118,7 @@ export class JTagInputComponentWithPlaceholder {
 
 @Component({
     selector: 'test-app',
-    template: `<tag-input [(ngModel)]="items" [maxItems]="2"></tag-input>`
+    template: `<j-tag-input [(ngModel)]="items" [maxItems]="2"></j-tag-input>`
 })
 /* tslint:disable */
 export class JTagInputComponentWithMaxItems {
@@ -128,9 +128,8 @@ export class JTagInputComponentWithMaxItems {
 
 @Component({
     selector: 'test-app',
-    template: `<tag-input [(ngModel)]="items">
-                    <tag-input-dropdown [autocompleteItems]="['item1', 'item2', 'itam3']"></tag-input-dropdown>
-               </tag-input>`
+    template: `<j-tag-input [(ngModel)]="items">
+               </j-tag-input>`
 })
 /* tslint:disable */
 export class JTagInputComponentWithAutocomplete {
@@ -140,7 +139,7 @@ export class JTagInputComponentWithAutocomplete {
 
 @Component({
     selector: 'test-app',
-    template: `<tag-input [(ngModel)]="items">
+    template: `<j-tag-input [(ngModel)]="items">
                     <ng-template let-item="item">
                         <span class="custom-class">
                             item: {{ item }}
@@ -150,7 +149,7 @@ export class JTagInputComponentWithAutocomplete {
                             x
                         </span>
                     </ng-template>
-                </tag-input>`
+                </j-tag-input>`
 })
 /* tslint:disable */
 export class JTagInputComponentWithTemplate {
@@ -160,10 +159,9 @@ export class JTagInputComponentWithTemplate {
 
 @Component({
     selector: 'test-app',
-    template: `<tag-input [(ngModel)]="items"
+    template: `<j-tag-input [(ngModel)]="items"
                            [onlyFromAutocomplete]="true">
-                   <tag-input-dropdown [autocompleteItems]="['item1', 'item2', 'itam3']"></tag-input-dropdown>
-               </tag-input>`
+               </j-tag-input>`
 })
 /* tslint:disable */
 export class JTagInputComponentWithOnlyAutocomplete {
@@ -173,7 +171,7 @@ export class JTagInputComponentWithOnlyAutocomplete {
 
 @Component({
     selector: 'test-app',
-    template: `<tag-input [(ngModel)]="items" [modelAsStrings]="true"></tag-input>`
+    template: `<j-tag-input [(ngModel)]="items" [modelAsStrings]="true"></j-tag-input>`
 })
 /* tslint:disable */
 export class JTagInputComponentWithModelAsStrings {
@@ -183,9 +181,8 @@ export class JTagInputComponentWithModelAsStrings {
 
 @Component({
     selector: 'test-app',
-    template: `<tag-input [(ngModel)]="items" [addOnBlur]="true">
-                   <tag-input-dropdown [autocompleteItems]="['item1', 'item2', 'itam3']"></tag-input-dropdown>
-               </tag-input>`
+    template: `<j-tag-input [(ngModel)]="items" [addOnBlur]="true">
+               </j-tag-input>`
 })
 /* tslint:disable */
 export class JTagInputComponentWithAddOnBlur {
@@ -195,9 +192,9 @@ export class JTagInputComponentWithAddOnBlur {
 
 @Component({
     selector: 'test-app',
-    template: `<tag-input [(ngModel)]="items"
+    template: `<j-tag-input [(ngModel)]="items"
                           [onRemoving]="onRemoving"
-                          [onAdding]="onAdding"></tag-input>`
+                          [onAdding]="onAdding"></j-tag-input>`
 })
 /* tslint:disable */
 export class JTagInputComponentWithHooks {

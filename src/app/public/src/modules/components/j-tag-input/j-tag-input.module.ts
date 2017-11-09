@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HighlightPipe, DragProvider, Options, OptionsProvider } from './core';
+import { HighlightPipe, DragProvider, Options, OptionsProvider } from '../../core';
 
 import {
     JTagComponent,
     JTagInputComponent,
     JTagInputFormComponent,
     JTagRippleComponent
-} from './components';
+} from '../';
 
 const COMPONENTS = [
     JTagInputComponent,

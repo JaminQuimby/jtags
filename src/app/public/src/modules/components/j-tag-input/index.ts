@@ -1,1 +1,1 @@
-export * from './j-tag-input';
+export * from './j-tag-input.component';

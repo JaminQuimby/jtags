@@ -43,19 +43,6 @@ export interface JTagInputOptions {
     };
 }
 
-export interface TagInputDropdownOptions {
-    displayBy: string;
-    identifyBy: string;
-    appendToBody: boolean;
-    offset: string;
-    focusFirstElement: boolean;
-    showDropdownIfEmpty: boolean;
-    minimumTextLength: number;
-    limitItemsTo: number;
-    keepOpen: boolean;
-    matchingFn: (value: string, target: JTagModel) => boolean;
-}
-
 export const defaults = {
     tagInput: <JTagInputOptions>{
         separatorKeys: [],

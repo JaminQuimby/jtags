@@ -8,7 +8,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/filter';
 
 @Component({
-  selector: 'j-tag',
+  selector: 'j-tag-demo',
   templateUrl: './j-tag-demo.component.html',
   styleUrls: ['./j-tag-demo.component.scss']
 })

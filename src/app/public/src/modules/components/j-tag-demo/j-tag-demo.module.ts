@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { JTagDemoComponent } from './j-tag-demo.component';
 import { JTagDemoInputDirective } from './j-tag-demo.directive';
-import { JTagInputModule } from '../j-tag-input.module';
+import { JTagInputModule } from '../j-tag-input/j-tag-input.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,8 @@ import { JTagInputModule } from '../j-tag-input.module';
     JTagInputModule
   ],
   exports: [
-    JTagInputModule
+    JTagDemoComponent,
+    JTagDemoInputDirective
   ]
 })
-export class JTagModule { }
+export class JTagDemoModule { }

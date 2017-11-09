@@ -8,7 +8,7 @@ export function isObject(obj: any): boolean {
     return obj === Object(obj);
 }
 
-export class TagInputAccessor implements ControlValueAccessor {
+export class JTagInputAccessor implements ControlValueAccessor {
     private _items: JTagModel[] = [];
     private _onTouchedCallback: () => void;
     private _onChangeCallback: (items: JTagModel[]) => void;

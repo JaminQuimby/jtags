@@ -133,24 +133,7 @@
             </j-tag-input>
         </div>
 
-        <div>
-            <h3>Drag and drop</h3>
-            <j-tag-input [(ngModel)]="dragAndDropExample" [modelAsStrings]="true" [dragZone]="'zone1'" [editable]="true">
-            </j-tag-input>
-        </div>
-
-        <div>
-            <h3>Drag and drop (as string) can be moved to another j-tag-input (to the next)</h3>
-            <j-tag-input [(ngModel)]="dragAndDropStrings" [modelAsStrings]="true" [dragZone]="'zone1'" [editable]="true">
-            </j-tag-input>
-        </div>
-
-        <div>
-            <h3>Drag and drop (as object) can be moved to another j-tag-input (to the previous)</h3>
-            <j-tag-input [(ngModel)]="dragAndDropObjects" [dragZone]="'zone1'" [editable]="true">
-            </j-tag-input>
-        </div>
-
+      
         <div>
             <h3>Confirm adding and removing tags with Observables</h3>
             <j-tag-input [ngModel]="['item1']" [dragZone]="'zone1'" [modelAsStrings]="true" [onRemoving]="onRemoving" [onAdding]="onAdding">

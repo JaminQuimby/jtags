@@ -1,4 +1,4 @@
-import { JTagInputComponent } from './../../components/j-tag-input/j-tag-input';
+import { JTagInputComponent } from './../../components/j-tag-input/j-tag-input.component';
 import { JTagModel } from '../accessor';
 
 import { Injectable } from '@angular/core';
