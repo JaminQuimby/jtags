@@ -12,13 +12,13 @@ import {
     Renderer2
 } from '@angular/core';
 
-import { TagModel } from '../../core';
+import { JTagModel } from '../../core';
 import { JTagRippleComponent } from '../j-tag';
 
 // angular universal hacks
-/* tslint:disable-next-line */
-const KeyboardEvent = (global as any).KeyboardEvent;
-const MouseEvent = (global as any).MouseEvent;
+
+// const KeyboardEvent = (global as any).KeyboardEvent;
+// const MouseEvent = (global as any).MouseEvent;
 
 // mocking navigator
 const navigator = typeof window !== 'undefined' ? window.navigator : {
@@ -35,7 +35,7 @@ const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigat
 })
 export class JTagComponent {
 
-    @Input() public model: TagModel;
+    @Input() public model: JTagModel;
     @Input() public removable: boolean;
     @Input() public editable: boolean;
     @Input() public template: TemplateRef<any>;
@@ -45,11 +45,11 @@ export class JTagComponent {
     @Input() public hasRipple: boolean;
     @Input() public disabled = false;
 
-    @Output() public onSelect: EventEmitter<TagModel> = new EventEmitter<TagModel>();
-    @Output() public onRemove: EventEmitter<TagModel> = new EventEmitter<TagModel>();
-    @Output() public onBlur: EventEmitter<TagModel> = new EventEmitter<TagModel>();
+    @Output() public onSelect: EventEmitter<JTagModel> = new EventEmitter<JTagModel>();
+    @Output() public onRemove: EventEmitter<JTagModel> = new EventEmitter<JTagModel>();
+    @Output() public onBlur: EventEmitter<JTagModel> = new EventEmitter<JTagModel>();
     @Output() public onKeyDown: EventEmitter<any> = new EventEmitter<any>();
-    @Output() public onTagEdited: EventEmitter<TagModel> = new EventEmitter<TagModel>();
+    @Output() public onTagEdited: EventEmitter<JTagModel> = new EventEmitter<JTagModel>();
 
     public get readonly(): boolean {
         return typeof this.model !== 'string' && this.model.readonly === true;
@@ -133,7 +133,7 @@ export class JTagComponent {
         this.onBlur.emit(result);
     }
 
-    public getDisplayValue(item: TagModel): string {
+    public getDisplayValue(item: JTagModel): string {
         return typeof item === 'string' ? item : item[this.displayBy];
     }
 
@@ -144,13 +144,20 @@ export class JTagComponent {
             this.hasRipple;
     }
 
+    public isDeleteIconVisible(): boolean {
+        return !this.readonly &&
+            !this.disabled &&
+            this.removable &&
+            !this.editing;
+    }
+
     private getContentEditableText(): string {
         const input = this.getContentEditable();
 
         return input ? input.innerText.trim() : '';
     }
 
-    private setContentEditableText(model: TagModel) {
+    private setContentEditableText(model: JTagModel) {
         const input = this.getContentEditable();
         const value = this.getDisplayValue(model);
 
@@ -185,7 +192,7 @@ export class JTagComponent {
     }
 
     private storeNewValue(input: string): void {
-        const exists = (model: TagModel) => {
+        const exists = (model: JTagModel) => {
             return typeof model === 'string' ?
                 model === input :
                 model[this.displayBy] === input;
@@ -206,10 +213,4 @@ export class JTagComponent {
         return this.element.nativeElement.querySelector('[contenteditable]');
     }
 
-    private isDeleteIconVisible(): boolean {
-        return !this.readonly &&
-            !this.disabled &&
-            this.removable &&
-            !this.editing;
-    }
 }

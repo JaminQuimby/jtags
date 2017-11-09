@@ -1,21 +1,17 @@
-import { defaults, TagInputOptions, TagInputDropdownOptions } from '../../defaults';
+import { defaults, JTagInputOptions } from '../../defaults';
 
 export type Options = {
     tagInput?: {
-        [P in keyof TagInputOptions]?: TagInputOptions[P];
+        [P in keyof JTagInputOptions]?: JTagInputOptions[P];
     };
-    dropdown?: {
-        [P in keyof TagInputDropdownOptions]?: TagInputDropdownOptions[P];
-    }
-}
+};
 
 export class OptionsProvider {
     public static defaults = defaults;
 
     public setOptions(options: Options): void {
         OptionsProvider.defaults.tagInput = {...defaults.tagInput, ...options.tagInput};
-        OptionsProvider.defaults.dropdown = {...defaults.dropdown, ...options.dropdown};
     }
 }
 
-export { TagInputDropdownOptions, TagInputOptions };
+export { JTagInputOptions };

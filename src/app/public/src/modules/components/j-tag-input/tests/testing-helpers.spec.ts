@@ -14,7 +14,7 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 
-import { JTagInputModule } from '../../../tag-input.module';
+import { JTagInputModule } from '../../../j-tag-input.module';
 
 function getItems() {
     return ['Javascript', 'Typescript'];
@@ -26,14 +26,14 @@ const validators = [Validators.minLength(3), (control: FormControl) => {
             'startsWithAt@': true
         };
     }
-    return null;
+    return undefined;
 }];
 
 @Component({
     selector: 'test-app',
     template: `<tag-input [(ngModel)]="items"></tag-input>`
 })
-export class BasicTagInputComponent {
+export class BasicJTagInputComponent {
     public items = getItems();
 }
 
@@ -45,29 +45,34 @@ export class BasicTagInputComponent {
                   (onAdd)="onAdd($event)">
               </tag-input>`
 })
-export class TagInputComponentWithOutputs {
+/* tslint:disable */
+export class JTagInputComponentWithOutputs {
+    /* tslint:enable */
+    public validators: any = validators;
     public items = getItems();
 
-    onAdd() {}
-    onRemove() {}
-
-    public validators: any = validators;
+    public onAdd() { }
+    public onRemove() { }
 }
 
 @Component({
     selector: 'test-app',
     template: `<tag-input [(ngModel)]="items"></tag-input>`
 })
-export class TagInputComponentTagsAsObjects {
-    public items = [{value: 0, display: 'React'}, {value: 1, display: 'Angular'}];
+/* tslint:disable */
+export class JTagInputComponentTagsAsObjects {
+    /* tslint:enable */
+    public items = [{ value: 0, display: 'React' }, { value: 1, display: 'Angular' }];
 }
 
 @Component({
     selector: 'test-app',
     template: `<tag-input [(ngModel)]="items"></tag-input>`
 })
-export class TagInputComponentCustomTagsAsObjects {
-    public items = [{id: 0, name: 'React'}, {id: 1, name: 'Angular'}];
+/* tslint:disable */
+export class JTagInputComponentCustomTagsAsObjects {
+    /* tslint:enable */
+    public items = [{ id: 0, name: 'React' }, { id: 1, name: 'Angular' }];
 }
 
 @Component({
@@ -77,9 +82,11 @@ export class TagInputComponentCustomTagsAsObjects {
                   [validators]="validators">
               </tag-input>`
 })
-export class TagInputComponentWithValidation {
+/* tslint:disable */
+export class JTagInputComponentWithValidation {
+    /* tslint:enable */
     public items = getItems();
-    validators: any = validators;
+    public validators: any = validators;
 }
 
 @Component({
@@ -88,11 +95,13 @@ export class TagInputComponentWithValidation {
                           [onAdding]="onAdding">
                          </tag-input>`
 })
-export class TagInputComponentWithTransformer {
+/* tslint:disable */
+export class JTagInputComponentWithTransformer {
+    /* tslint:enable */
     public items = getItems();
 
-    onAdding(value: string): Observable<object> {
-        const item = {display: `prefix: ${value}`, value: `prefix: ${value}`};
+    public onAdding(value: string): Observable<object> {
+        const item = { display: `prefix: ${value}`, value: `prefix: ${value}` };
         return Observable.of(item);
     }
 }
@@ -101,7 +110,9 @@ export class TagInputComponentWithTransformer {
     selector: 'test-app',
     template: `<tag-input [(ngModel)]="items" [placeholder]="'New Tag'"></tag-input>`
 })
-export class TagInputComponentWithPlaceholder {
+/* tslint:disable */
+export class JTagInputComponentWithPlaceholder {
+    /* tslint:enable */
     public items = getItems();
 }
 
@@ -109,10 +120,11 @@ export class TagInputComponentWithPlaceholder {
     selector: 'test-app',
     template: `<tag-input [(ngModel)]="items" [maxItems]="2"></tag-input>`
 })
-export class TagInputComponentWithMaxItems {
+/* tslint:disable */
+export class JTagInputComponentWithMaxItems {
+    /* tslint:enable */
     public items = getItems();
 }
-
 
 @Component({
     selector: 'test-app',
@@ -120,7 +132,9 @@ export class TagInputComponentWithMaxItems {
                     <tag-input-dropdown [autocompleteItems]="['item1', 'item2', 'itam3']"></tag-input-dropdown>
                </tag-input>`
 })
-export class TagInputComponentWithAutocomplete {
+/* tslint:disable */
+export class JTagInputComponentWithAutocomplete {
+    /* tslint:enable */
     public items = getItems();
 }
 
@@ -138,7 +152,9 @@ export class TagInputComponentWithAutocomplete {
                     </ng-template>
                 </tag-input>`
 })
-export class TagInputComponentWithTemplate {
+/* tslint:disable */
+export class JTagInputComponentWithTemplate {
+    /* tslint:enable */
     public items = getItems();
 }
 
@@ -149,7 +165,9 @@ export class TagInputComponentWithTemplate {
                    <tag-input-dropdown [autocompleteItems]="['item1', 'item2', 'itam3']"></tag-input-dropdown>
                </tag-input>`
 })
-export class TagInputComponentWithOnlyAutocomplete {
+/* tslint:disable */
+export class JTagInputComponentWithOnlyAutocomplete {
+    /* tslint:enable */
     public items = getItems();
 }
 
@@ -157,7 +175,9 @@ export class TagInputComponentWithOnlyAutocomplete {
     selector: 'test-app',
     template: `<tag-input [(ngModel)]="items" [modelAsStrings]="true"></tag-input>`
 })
-export class TagInputComponentWithModelAsStrings {
+/* tslint:disable */
+export class JTagInputComponentWithModelAsStrings {
+    /* tslint:enable */
     public items = getItems();
 }
 
@@ -167,43 +187,47 @@ export class TagInputComponentWithModelAsStrings {
                    <tag-input-dropdown [autocompleteItems]="['item1', 'item2', 'itam3']"></tag-input-dropdown>
                </tag-input>`
 })
-export class TagInputComponentWithAddOnBlur {
+/* tslint:disable */
+export class JTagInputComponentWithAddOnBlur {
+    /* tslint:enable */
     public items = getItems();
 }
 
 @Component({
     selector: 'test-app',
-    template: `<tag-input [(ngModel)]="items" 
+    template: `<tag-input [(ngModel)]="items"
                           [onRemoving]="onRemoving"
                           [onAdding]="onAdding"></tag-input>`
 })
-export class TagInputComponentWithHooks {
+/* tslint:disable */
+export class JTagInputComponentWithHooks {
+    /* tslint:enable */
     public items = getItems();
 
-    public onAdding(tag): Observable<any> {
+    public onAdding(tag: any): Observable<any> {
         return;
     }
 
-    public onRemoving(tag): Observable<any> {
+    public onRemoving(tag: any): Observable<any> {
         return;
     }
 }
 
 const COMPONENTS = [
-    BasicTagInputComponent,
-    TagInputComponentWithPlaceholder,
-    TagInputComponentWithOutputs,
-    TagInputComponentWithTransformer,
-    TagInputComponentWithValidation,
-    TagInputComponentWithMaxItems,
-    TagInputComponentWithTemplate,
-    TagInputComponentWithAutocomplete,
-    TagInputComponentWithOnlyAutocomplete,
-    TagInputComponentTagsAsObjects,
-    TagInputComponentCustomTagsAsObjects,
-    TagInputComponentWithModelAsStrings,
-    TagInputComponentWithAddOnBlur,
-    TagInputComponentWithHooks
+    BasicJTagInputComponent,
+    JTagInputComponentWithPlaceholder,
+    JTagInputComponentWithOutputs,
+    JTagInputComponentWithTransformer,
+    JTagInputComponentWithValidation,
+    JTagInputComponentWithMaxItems,
+    JTagInputComponentWithTemplate,
+    JTagInputComponentWithAutocomplete,
+    JTagInputComponentWithOnlyAutocomplete,
+    JTagInputComponentTagsAsObjects,
+    JTagInputComponentCustomTagsAsObjects,
+    JTagInputComponentWithModelAsStrings,
+    JTagInputComponentWithAddOnBlur,
+    JTagInputComponentWithHooks
 ];
 
 @NgModule({
@@ -211,4 +235,4 @@ const COMPONENTS = [
     declarations: COMPONENTS,
     exports: COMPONENTS
 })
-export class TestModule {}
+export class TestModule { }

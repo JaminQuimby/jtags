@@ -1,36 +1,27 @@
-import { defaults } from './../defaults';
 import { ControlValueAccessor } from '@angular/forms';
 import { Input } from '@angular/core';
 import { OptionsProvider } from './providers';
 
-export type TagModel = string | {[key: string]: any};
+export type JTagModel = string | {[key: string]: any};
 
 export function isObject(obj: any): boolean {
     return obj === Object(obj);
 }
 
 export class TagInputAccessor implements ControlValueAccessor {
-    private _items: TagModel[] = [];
+    private _items: JTagModel[] = [];
     private _onTouchedCallback: () => void;
-    private _onChangeCallback: (items: TagModel[]) => void;
+    private _onChangeCallback: (items: JTagModel[]) => void;
 
-    /**
-     * @name displayBy
-     * @type {string}
-     */
     @Input() public displayBy: string = OptionsProvider.defaults.tagInput.displayBy;
 
-    /**
-     * @name identifyBy
-     * @type {string}
-     */
     @Input() public identifyBy: string = OptionsProvider.defaults.tagInput.identifyBy;
 
-    public get items(): TagModel[] {
+    public get items(): JTagModel[] {
         return this._items;
-    };
+    }
 
-    public set items(items: TagModel[]) {
+    public set items(items: JTagModel[]) {
         this._items = items;
         this._onChangeCallback(this._items);
     }
@@ -51,30 +42,15 @@ export class TagInputAccessor implements ControlValueAccessor {
         this._onTouchedCallback = fn;
     }
 
-    /**
-     * @name getItemValue
-     * @param item
-     * @return {TagModel}
-     */
-    public getItemValue(item: TagModel): string {
-        return isObject(item) ? item[this.identifyBy] : item;
+    public getItemValue(item: JTagModel): string {
+        return isObject(item) ? (<any>item)[this.identifyBy] : item;
     }
 
-    /**
-     * @name getItemDisplay
-     * @param item
-     * @return {TagModel}
-     */
-    public getItemDisplay(item: TagModel): string {
-        return isObject(item) ? item[this.displayBy] : item;
+    public getItemDisplay(item: JTagModel): string {
+        return isObject(item) ? (<any>item)[this.displayBy] : item;
     }
 
-    /**
-     * @name getItemsWithout
-     * @param index
-     * @return {TagModel[]}
-     */
-    protected getItemsWithout(index: number): TagModel[] {
+    protected getItemsWithout(index: number): JTagModel[] {
         return this.items.filter((item, position) => position !== index);
     }
 }

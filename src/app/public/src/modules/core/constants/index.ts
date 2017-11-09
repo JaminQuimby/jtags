@@ -1,7 +1,3 @@
-/*
-** constants and default values for <tag-input>
- */
-
 export const PLACEHOLDER = '+ Tag';
 export const SECONDARY_PLACEHOLDER = 'Enter a new tag';
 export const KEYDOWN = 'keydown';

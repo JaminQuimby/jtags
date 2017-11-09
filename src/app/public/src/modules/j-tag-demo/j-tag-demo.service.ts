@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class JTagService {
+export class JTagDemoService {
   public skyux: any = {
     app: {
       title: ''

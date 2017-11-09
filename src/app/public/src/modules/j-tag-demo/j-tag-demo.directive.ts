@@ -11,8 +11,8 @@ import {
   SimpleChanges
 } from '@angular/core';
 
-import { JTaginputInterface, JTagOutputInterface } from './j-tag.interface';
-import { JTagComponent } from './j-tag.component';
+import { JTagDemoInputInterface, JTagDemoOutputInterface } from './j-tag-demo.interface';
+import { JTagDemoComponent } from './j-tag-demo.component';
 
 import {
   ControlValueAccessor,
@@ -29,13 +29,13 @@ import {
 // tslint:disable
 const SKY_JTAG_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => JTagInputDirective),
+  useExisting: forwardRef(() => JTagDemoInputDirective),
   multi: true
 };
 
 const SKY_JTAG_VALIDATOR = {
   provide: NG_VALIDATORS,
-  useExisting: forwardRef(() => JTagInputDirective),
+  useExisting: forwardRef(() => JTagDemoInputDirective),
   multi: true
 };
 // tslint:enable
@@ -46,17 +46,17 @@ const SKY_JTAG_VALIDATOR = {
     SKY_JTAG_VALIDATOR
   ]
 })
-export class JTagInputDirective implements
+export class JTagDemoInputDirective implements
   OnInit, OnDestroy, ControlValueAccessor, Validator, OnChanges {
 
   public pickerChangedSubscription: Subscription;
 
   @Input()
-  public jTagInput: JTagComponent;
+  public jTagInput: JTagDemoComponent;
 
   @Input()
   public returnFormat: string;
-  private modelValue: JTagOutputInterface;
+  private modelValue: JTagDemoOutputInterface;
   public constructor(private renderer: Renderer, private elRef: ElementRef) {
   }
 
@@ -109,7 +109,7 @@ export class JTagInputDirective implements
 
     return undefined;
   }
-  private writeModelValue(model: JTaginputInterface) {
+  private writeModelValue(model: JTagDemoInputInterface) {
     let setElementValue: string;
     if (model) {
       /* istanbul ignore next */

@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
 
-import { JTagComponent } from './j-tag.component';
-import { JTagService } from './j-tag.service';
+import { JTagDemoComponent } from './j-tag-demo.component';
+import { JTagDemoService } from './j-tag-demo.service';
 
 class MockSkyAppConfig {
   public runtime: any = {};
@@ -18,21 +18,21 @@ class MockSkyAppConfig {
 }
 
 describe('JTagsComponent', () => {
-  let component: JTagComponent;
-  let fixture: ComponentFixture<JTagComponent>;
+  let component: JTagDemoComponent;
+  let fixture: ComponentFixture<JTagDemoComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        JTagComponent
+        JTagDemoComponent
       ],
       providers: [
-        { provide: JTagService, useClass: MockSkyAppConfig }
+        { provide: JTagDemoService, useClass: MockSkyAppConfig }
       ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(JTagComponent);
+    fixture = TestBed.createComponent(JTagDemoComponent);
     component = fixture.componentInstance;
   });
 

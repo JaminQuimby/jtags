@@ -1,1 +1,1 @@
-export * from './src/modules/j-tags';
+export * from './src/modules/j-tag-demo';

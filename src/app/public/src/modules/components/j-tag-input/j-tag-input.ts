@@ -10,7 +10,6 @@ import {
     ViewChild,
     ViewChildren,
     ContentChildren,
-    ContentChild,
     OnInit,
     TemplateRef,
     QueryList,
@@ -35,7 +34,7 @@ import 'rxjs/add/operator/map';
 // ng2-tag-input
 import {
     TagInputAccessor,
-    TagModel,
+    JTagModel,
     listen,
     constants
 } from '../../core';
@@ -44,19 +43,18 @@ import {
     DragProvider,
     DraggedTag,
     OptionsProvider,
-    TagInputOptions
+    JTagInputOptions
 } from '../../core/providers';
 
 import {
     JTagInputFormComponent,
-    JTagInputDropdownComponent,
     JTagComponent
 } from '../../components';
 
 import { animations } from './animations';
 
 // angular universal hacks
-const DragEvent = (global as any).DragEvent;
+// const DragEvent = (global as any).DragEvent;
 
 // tslint:disable
 const CUSTOM_ACCESSOR = {
@@ -64,7 +62,7 @@ const CUSTOM_ACCESSOR = {
     useExisting: forwardRef(() => JTagInputComponent),
     multi: true
 };
-const defaults: Type<TagInputOptions> = forwardRef(() => OptionsProvider.defaults.tagInput);
+const defaults: Type<JTagInputOptions> = forwardRef(() => OptionsProvider.defaults.tagInput);
 // tslint:enable
 
 @Component({
@@ -108,22 +106,21 @@ export class JTagInputComponent extends TagInputAccessor implements OnInit, Afte
     @Input() public onRemoving = new defaults().onRemoving;
     @Input() public onAdding = new defaults().onAdding;
     @Input() public animationDuration = new defaults().animationDuration;
-    @Output() public onAdd = new EventEmitter<TagModel>();
-    @Output() public onRemove = new EventEmitter<TagModel>();
-    @Output() public onSelect = new EventEmitter<TagModel>();
+    @Output() public onAdd = new EventEmitter<JTagModel>();
+    @Output() public onRemove = new EventEmitter<JTagModel>();
+    @Output() public onSelect = new EventEmitter<JTagModel>();
     @Output() public onFocus = new EventEmitter<string>();
     @Output() public onBlur = new EventEmitter<string>();
-    @Output() public onTextChange = new EventEmitter<TagModel>();
+    @Output() public onTextChange = new EventEmitter<JTagModel>();
     @Output() public onPaste = new EventEmitter<string>();
-    @Output() public onValidationError = new EventEmitter<TagModel>();
-    @Output() public onTagEdited = new EventEmitter<TagModel>();
+    @Output() public onValidationError = new EventEmitter<JTagModel>();
+    @Output() public onTagEdited = new EventEmitter<JTagModel>();
 
-    @ContentChild(JTagInputDropdownComponent) public dropdown: JTagInputDropdownComponent;
     @ContentChildren(TemplateRef, { descendants: false }) public templates: QueryList<TemplateRef<any>>;
 
     @ViewChild(JTagInputFormComponent) public inputForm: JTagInputFormComponent;
 
-    public selectedTag: TagModel | undefined;
+    public selectedTag: JTagModel | undefined;
     public isLoading = false;
     public set inputText(text: string) {
         this.inputTextValue = text;
@@ -200,31 +197,29 @@ export class JTagInputComponent extends TagInputAccessor implements OnInit, Afte
         this.setAnimationMetadata();
     }
 
-    public onRemoveRequested(tag: TagModel, index: number): void {
-        const subscribeFn = (model: TagModel) => this.removeItem(model, index);
+    public onRemoveRequested(tag: JTagModel, index: number): void {
+        const subscribeFn = (model: JTagModel) => this.removeItem(model, index);
 
         this.onRemoving ?
             this.onRemoving(tag)
-                .first()
                 .subscribe(subscribeFn) : subscribeFn(tag);
     }
 
-    public onAddingRequested(fromAutocomplete: boolean, tag: TagModel, index?: number): void {
+    public onAddingRequested(fromAutocomplete: boolean, tag: JTagModel, index?: number): void {
         if (!tag) {
             return;
         }
 
-        const subscribeFn = (model: TagModel) => {
+        const subscribeFn = (model: JTagModel) => {
             return this.addItem(fromAutocomplete, model, index);
         };
 
         this.onAdding ?
             this.onAdding(tag)
-                .first()
                 .subscribe(subscribeFn) : subscribeFn(tag);
     }
 
-    public appendTag = (tag: TagModel, index = this.items.length): void => {
+    public appendTag = (tag: JTagModel, index = this.items.length): void => {
         const items = this.items;
         const model = this.modelAsStrings ? (<any>tag)[this.identifyBy] : tag;
 
@@ -235,8 +230,8 @@ export class JTagInputComponent extends TagInputAccessor implements OnInit, Afte
         ];
     }
 
-    public createTag = (model: TagModel): TagModel => {
-        const trim = (val: TagModel, key: string): TagModel => {
+    public createTag = (model: JTagModel): JTagModel => {
+        const trim = (val: JTagModel, key: string): JTagModel => {
             return typeof val === 'string' ? val.trim() : val[key];
         };
 
@@ -247,7 +242,7 @@ export class JTagInputComponent extends TagInputAccessor implements OnInit, Afte
         };
     }
 
-    public selectItem(item: TagModel | undefined, emit = true): void {
+    public selectItem(item: JTagModel | undefined, emit = true): void {
         const isReadonly = item && typeof item !== 'string' && item.readonly;
 
         if (isReadonly || this.selectedTag === item) {
@@ -329,8 +324,7 @@ export class JTagInputComponent extends TagInputAccessor implements OnInit, Afte
 
     public hasCustomTemplate(): boolean {
         const template = this.templates ? this.templates.first : undefined;
-        const menuTemplate = this.dropdown && this.dropdown.templates ?
-            this.dropdown.templates.first : undefined;
+        const menuTemplate: any = undefined;
 
         return Boolean(template && template !== menuTemplate);
     }
@@ -346,7 +340,7 @@ export class JTagInputComponent extends TagInputAccessor implements OnInit, Afte
         return form ? form.value : '';
     }
 
-    public onDragStarted(event: DragEvent, tag: TagModel, index: number): void {
+    public onDragStarted(event: DragEvent, tag: JTagModel, index: number): void {
         event.stopPropagation();
 
         const item = { zone: this.dragZone, tag, index } as DraggedTag;
@@ -383,12 +377,12 @@ export class JTagInputComponent extends TagInputAccessor implements OnInit, Afte
         return Boolean(isReceiver && isDropping);
     }
 
-    public onTagBlurred(changedElement: TagModel, index: number): void {
+    public onTagBlurred(changedElement: JTagModel, index: number): void {
         this.items[index] = changedElement;
         this.blur();
     }
 
-    public trackBy(item: TagModel): string {
+    public trackBy(item: JTagModel): string {
         return (<any>item)[this.identifyBy];
     }
 
@@ -396,8 +390,8 @@ export class JTagInputComponent extends TagInputAccessor implements OnInit, Afte
         return <FormControl>this.inputForm.value;
     }
 
-    private isTagValid(tag: TagModel, fromAutocomplete = false): boolean {
-        const selectedItem = this.dropdown ? this.dropdown.selectedItem : undefined;
+    private isTagValid(tag: JTagModel, fromAutocomplete = false): boolean {
+        const selectedItem: any = undefined;
 
         if (selectedItem && !fromAutocomplete) {
             return false;
@@ -432,7 +426,7 @@ export class JTagInputComponent extends TagInputAccessor implements OnInit, Afte
         return assertions.filter(item => item).length === assertions.length;
     }
 
-    private moveToTag(item: TagModel, direction: string): void {
+    private moveToTag(item: JTagModel, direction: string): void {
         const isLast = this.tags.last.model === item;
         const isFirst = this.tags.first.model === item;
         const stopSwitch = (direction === constants.NEXT && isLast) ||
@@ -450,7 +444,7 @@ export class JTagInputComponent extends TagInputAccessor implements OnInit, Afte
         return tag.select.call(tag);
     }
 
-    private getTagIndex(item: TagModel): number {
+    private getTagIndex(item: JTagModel): number {
         const tags = this.tags.toArray();
 
         return tags.findIndex(tag => tag.model === item);
@@ -462,7 +456,7 @@ export class JTagInputComponent extends TagInputAccessor implements OnInit, Afte
         return tags[index];
     }
 
-    private removeItem(tag: TagModel, index: number): void {
+    private removeItem(tag: JTagModel, index: number): void {
         this.items = this.getItemsWithout(index);
 
         // if the removed tag was selected, set it as undefined
@@ -477,7 +471,7 @@ export class JTagInputComponent extends TagInputAccessor implements OnInit, Afte
         this.onRemove.emit(tag);
     }
 
-    private addItem(fromAutocomplete = false, item: TagModel, index?: number): void {
+    private addItem(fromAutocomplete = false, item: JTagModel, index?: number): void {
         const model = this.getItemDisplay(item);
 
         const reset = (): void => {
@@ -488,7 +482,7 @@ export class JTagInputComponent extends TagInputAccessor implements OnInit, Afte
             this.focus(true, false);
         };
 
-        const validationFilter = (tag: TagModel): boolean => {
+        const validationFilter = (tag: JTagModel): boolean => {
             const isValid = this.isTagValid(tag, fromAutocomplete) && this.inputForm.form.valid;
 
             if (!isValid) {
@@ -498,23 +492,16 @@ export class JTagInputComponent extends TagInputAccessor implements OnInit, Afte
             return isValid;
         };
 
-        const subscribeFn = (tag: TagModel): void => {
+        const subscribeFn = (tag: JTagModel): void => {
             this.appendTag(tag, index);
 
             // emit event
             this.onAdd.emit(tag);
 
-            if (!this.dropdown) {
-                return;
-            }
-
-            this.dropdown.hide();
-            if (this.dropdown.showDropdownIfEmpty) { this.dropdown.show(); }
         };
 
         Observable
             .of(model)
-            .first()
             .filter(() => model.trim() !== '')
             .map(() => item)
             .map(this.createTag)
@@ -579,7 +566,7 @@ export class JTagInputComponent extends TagInputAccessor implements OnInit, Afte
 
     private setUpOnBlurSubscriber(): void {
         const filterFn = (): boolean => {
-            return !(this.dropdown && this.dropdown.isVisible) && !!this.formValue;
+            return !!this.formValue;
         };
 
         this.inputForm
@@ -594,8 +581,8 @@ export class JTagInputComponent extends TagInputAccessor implements OnInit, Afte
             });
     }
 
-    private findDupe(tag: TagModel, isFromAutocomplete: boolean): TagModel | undefined {
-        const identifyBy = isFromAutocomplete ? this.dropdown.identifyBy : this.identifyBy;
+    private findDupe(tag: JTagModel, isFromAutocomplete: boolean): JTagModel | undefined {
+        const identifyBy = this.identifyBy;
         const id = (<any>tag)[identifyBy];
 
         return this.items.find(item => this.getItemValue(item) === id);

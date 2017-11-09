@@ -1,0 +1,167 @@
+<div>
+    <div class="home-container">
+
+        <div>
+            <h3>Simple Input with two items</h3>
+            <j-tag-input [(ngModel)]="items" (onSelect)="onSelect($event)" [modelAsStrings]="true"></j-tag-input>
+        </div>
+
+        <div>
+            <h3>Partially editable input with two items as objects</h3>
+            <j-tag-input [(ngModel)]="itemsAsObjects" [identifyBy]="'id'" [displayBy]="'name'"></j-tag-input>
+        </div>
+
+        <div>
+            <h3>Simple Input with not removable items</h3>
+            <j-tag-input [ngModel]="items" [removable]="false"></j-tag-input>
+        </div>
+
+        <div>
+            <h3>Simple Input with editable items</h3>
+            <j-tag-input [ngModel]="items" [editable]="true" (onTagEdited)="onTagEdited($event)"></j-tag-input>
+        </div>
+
+        <div>
+            <h3>Input tag that allows max 3 tags</h3>
+            <j-tag-input [ngModel]="['Javascript', 'Typescript']" [maxItems]="3" [ripple]="false" placeholder="Insert a new item">
+            </j-tag-input>
+        </div>
+
+        <div>
+            <h3>An input which requires all tags to start with @ and end with $</h3>
+            <j-tag-input [ngModel]="['@item']" [errorMessages]="errorMessages" [validators]="validators"></j-tag-input>
+        </div>
+
+        <div>
+            <h3>An input which will transform the value of all added tags prepending '@' to the tag</h3>
+            <j-tag-input [ngModel]="['@item']" [onAdding]="transform"></j-tag-input>
+        </div>
+
+
+        <div>
+            <h3>An input which allows adding items by pressing the key "space" of your keyboard</h3>
+            <j-tag-input [ngModel]="['@item']" [inputClass]="'myinput'" [inputId]="'myinputId'" [separatorKeyCodes]="[32, 188]"></j-tag-input>
+        </div>
+
+        <div>
+            <h3>Tags custom template</h3>
+            <j-tag-input [ngModel]="['@item']" [modelAsStrings]="true" #input (onTextChange)="onTextChange($event)">
+                <ng-template item-template let-item="item" let-index="index">
+                    <span>
+                        item: {{ item }}
+                    </span>
+
+                    <span (click)="input.removeItem(item, index)" class="ng2-tag__remove-button">
+                        x
+                    </span>
+                </ng-template>
+            </j-tag-input>
+        </div>
+
+        <div>
+            <h3>Tags within a form element with outputs</h3>
+            <form>
+                <j-tag-input (onBlur)="onBlur($event)" (onFocus)="onFocus($event)" (onTextChange)="onTextChange($event)" (onValidationError)="onValidationError($event)"
+                    [ngModel]="['@item']" name="items"></j-tag-input>
+            </form>
+        </div>
+
+        <div>
+            <h3>Tags within a form group</h3>
+            <form>
+                <j-tag-input [disable]="true" name="items">
+                </j-tag-input>
+            </form>
+        </div>
+
+        <div>
+            <h3>Tags with theme minimal</h3>
+            <form>
+                <j-tag-input [theme]="'minimal'" [ngModel]="['@item']" name="items"></j-tag-input>
+            </form>
+        </div>
+
+        <div>
+            <h3>Tags with theme dark and pasteable items</h3>
+            <form>
+                <j-tag-input [addOnPaste]="true" [pasteSplitPattern]="'-'" [theme]="'dark'" [ngModel]="['@item']" name="items"></j-tag-input>
+            </form>
+        </div>
+
+        <div>
+            <h3>Tags with Bootstrap theme</h3>
+            <form>
+                <j-tag-input [theme]="'bootstrap'" [ngModel]="['@item']" name="items">
+                </j-tag-input>
+            </form>
+        </div>
+
+        <div>
+            <h3>Tags with user-defined Foundation theme</h3>
+            <j-tag-input [ngModel]="items" [theme]="'foundation-theme'" [modelAsStrings]="true">
+            </j-tag-input>
+        </div>
+
+        <div>
+            <h3>Tags with Bootstrap 3 (info) theme</h3>
+            <form>
+                <j-tag-input [theme]="'bootstrap3-info'" [ngModel]="['@item']" name="items">
+                </j-tag-input>
+            </form>
+        </div>
+
+        <div>
+            <h3>Simple Input that allows dupes</h3>
+            <j-tag-input [(ngModel)]="items" [allowDupes]="true"></j-tag-input>
+        </div>
+
+        <div>
+            <h3>Input with two-way data binding for its input text</h3>
+
+            <input [(ngModel)]="inputText" />
+
+            <j-tag-input [(ngModel)]="items" [(inputText)]="inputText"></j-tag-input>
+        </div>
+
+        <div>
+            <h3>Disabled tag input</h3>
+
+            Disable:
+            <input type="checkbox" [(ngModel)]="disabled" />
+
+            <j-tag-input [ngModel]="items" [disabled]="disabled">
+            </j-tag-input>
+        </div>
+
+        <div>
+            <h3>Drag and drop</h3>
+            <j-tag-input [(ngModel)]="dragAndDropExample" [modelAsStrings]="true" [dragZone]="'zone1'" [editable]="true">
+            </j-tag-input>
+        </div>
+
+        <div>
+            <h3>Drag and drop (as string) can be moved to another j-tag-input (to the next)</h3>
+            <j-tag-input [(ngModel)]="dragAndDropStrings" [modelAsStrings]="true" [dragZone]="'zone1'" [editable]="true">
+            </j-tag-input>
+        </div>
+
+        <div>
+            <h3>Drag and drop (as object) can be moved to another j-tag-input (to the previous)</h3>
+            <j-tag-input [(ngModel)]="dragAndDropObjects" [dragZone]="'zone1'" [editable]="true">
+            </j-tag-input>
+        </div>
+
+        <div>
+            <h3>Confirm adding and removing tags with Observables</h3>
+            <j-tag-input [ngModel]="['item1']" [dragZone]="'zone1'" [modelAsStrings]="true" [onRemoving]="onRemoving" [onAdding]="onAdding">
+            </j-tag-input>
+        </div>
+
+        <div>
+            <h3>Form using an async validator</h3>
+            <j-tag-input [ngModel]="['item1']" [errorMessages]="asyncErrorMessages" [asyncValidators]="asyncValidators">
+            </j-tag-input>
+        </div>
+
+    </div>
+</div>

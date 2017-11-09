@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Ng2DropdownModule } from 'ng2-material-dropdown';
 import { HighlightPipe, DragProvider, Options, OptionsProvider } from './core';
 
 import {
     JTagComponent,
     JTagInputComponent,
-    JTagInputDropdownComponent,
     JTagInputFormComponent,
     JTagRippleComponent
 } from './components';
@@ -17,7 +15,6 @@ const COMPONENTS = [
     JTagInputFormComponent,
     JTagComponent,
     HighlightPipe,
-    JTagInputDropdownComponent,
     JTagRippleComponent
 ];
 
@@ -27,8 +24,7 @@ const optionsProvider = new OptionsProvider();
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        FormsModule,
-        Ng2DropdownModule
+        FormsModule
     ],
     declarations: COMPONENTS,
     exports: COMPONENTS,

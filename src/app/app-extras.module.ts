@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 
 import { SkyAppConfig } from '@blackbaud/skyux-builder/runtime';
 
-import { JTagModule } from './public/src/modules/j-tags';
-import { JTagService } from './public/src/modules/j-tags';
+import { JTagModule } from './public/src/modules/j-tag-demo';
+import { JTagDemoService } from './public/src/modules/j-tag-demo';
 
 // Specify entry components, module-level providers, etc. here.
 @NgModule({
@@ -16,7 +16,7 @@ import { JTagService } from './public/src/modules/j-tags';
   providers: [
     // The config service acts as an adaptor for skyuxconfig.json:
     {
-      provide: JTagService,
+      provide: JTagDemoService,
       useExisting: SkyAppConfig
     }
   ],

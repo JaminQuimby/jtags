@@ -1,12 +1,10 @@
-import { AnimationEntryMetadata } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ValidatorFn, AsyncValidatorFn } from '@angular/forms';
 
 import { SECONDARY_PLACEHOLDER, PLACEHOLDER } from './core/constants';
-import { TagInputDropdown } from './components/dropdown/tag-input-dropdown.component';
-import { TagModel } from './core';
+import { JTagModel } from './core';
 
-export interface TagInputOptions {
+export interface JTagInputOptions {
     separatorKeys: string[];
     separatorKeyCodes: number[];
     maxItems: number;
@@ -35,8 +33,8 @@ export interface TagInputOptions {
     tabIndex: string;
     disable: boolean;
     dragZone: string;
-    onRemoving?: (tag: TagModel) => Observable<TagModel>;
-    onAdding?: (tag: TagModel) => Observable<TagModel>;
+    onRemoving?: (tag: JTagModel) => Observable<JTagModel>;
+    onAdding?: (tag: JTagModel) => Observable<JTagModel>;
     displayBy: string;
     identifyBy: string;
     animationDuration: {
@@ -55,11 +53,11 @@ export interface TagInputDropdownOptions {
     minimumTextLength: number;
     limitItemsTo: number;
     keepOpen: boolean;
-    matchingFn: (value: string, target: TagModel) => boolean;
+    matchingFn: (value: string, target: JTagModel) => boolean;
 }
 
 export const defaults = {
-    tagInput: <TagInputOptions>{
+    tagInput: <JTagInputOptions>{
         separatorKeys: [],
         separatorKeyCodes: [],
         maxItems: Infinity,
@@ -93,34 +91,8 @@ export const defaults = {
         displayBy: 'display',
         identifyBy: 'value',
         animationDuration: {
-            enter: "250ms",
-            leave: "150ms"
+            enter: '250ms',
+            leave: '150ms'
         }
-    },
-    dropdown: <TagInputDropdownOptions>{
-        displayBy: 'display',
-        identifyBy: 'value',
-        appendToBody: true,
-        offset: '50 0',
-        focusFirstElement: false,
-        showDropdownIfEmpty: false,
-        minimumTextLength: 1,
-        limitItemsTo: Infinity,
-        keepOpen: true,
-        matchingFn
     }
 };
-
-/**
- * @name matchingFn
- * @param this 
- * @param value 
- * @param target 
- */
-function matchingFn(this: TagInputDropdown, value: string, target: TagModel): boolean {
-    const targetValue = target[this.displayBy].toString();
-
-    return targetValue && targetValue
-        .toLowerCase()
-        .indexOf(value.toLowerCase()) >= 0;
-}
