@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule } from '@angular/forms';
 import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
-
+import { JTagInputModule } from '../j-tag-input/j-tag-input.module';
 import { JTagDemoComponent } from './j-tag-demo.component';
 import { JTagDemoService } from './j-tag-demo.service';
 
@@ -17,7 +17,7 @@ class MockSkyAppConfig {
   };
 }
 
-describe('JTagsComponent', () => {
+describe('JTagsDemComponent', () => {
   let component: JTagDemoComponent;
   let fixture: ComponentFixture<JTagDemoComponent>;
 
@@ -26,11 +26,12 @@ describe('JTagsComponent', () => {
       declarations: [
         JTagDemoComponent
       ],
+      imports: [FormsModule, JTagInputModule],
       providers: [
         { provide: JTagDemoService, useClass: MockSkyAppConfig }
       ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(JTagDemoComponent);
     component = fixture.componentInstance;

@@ -22,7 +22,6 @@ import {
     JTagInputComponentWithPlaceholder,
     JTagInputComponentWithMaxItems,
     JTagInputComponentWithTemplate,
-    JTagInputComponentWithAutocomplete,
     JTagInputComponentWithOnlyAutocomplete,
     TestModule,
     JTagInputComponentWithModelAsStrings,
@@ -163,7 +162,7 @@ describe('JTagInputComponent', () => {
     describe('when an item is removed', () => {
         let fixture: ComponentFixture<BasicJTagInputComponent>;
         let tagName: string;
-      //  let item: JTagModel;
+        //  let item: JTagModel;
         let component;
 
         beforeEach(() => {
@@ -398,86 +397,6 @@ describe('JTagInputComponent', () => {
         let keyUp: Event = new Event('keyUp');
         (<any>keyUp)['keyCode'] = 73;
 
-        it('shows a dropdown when entering a matching value', fakeAsync(() => {
-            const fixture: ComponentFixture<JTagInputComponentWithAutocomplete> =
-                TestBed.createComponent(JTagInputComponentWithAutocomplete);
-
-            const component = getComponent(fixture);
-
-            // press 'i'
-            component.setInputValue('i');
-            component.dropdown.show();
-            fixture.detectChanges();
-            tick();
-
-            const dropdown = document.querySelector('.ng2-dropdown-menu-container');
-            const items = document.querySelectorAll('ng2-menu-item');
-
-            expect(dropdown).toBeDefined();
-            expect(component.dropdown.items.length).toEqual(3);
-            expect(items.length).toEqual(3);
-
-            discardPeriodicTasks();
-        }));
-
-        it('filters matching values', fakeAsync(() => {
-            const fixture: ComponentFixture<JTagInputComponentWithAutocomplete> =
-                TestBed.createComponent(JTagInputComponentWithAutocomplete);
-            const component = getComponent(fixture);
-
-            // press 'i'
-            component.setInputValue('i');
-            component.dropdown.show();
-
-            fixture.detectChanges();
-            tick();
-
-            expect(component.dropdown.items.length).toEqual(3);
-            component.dropdown.dropdown.hide();
-
-            component.setInputValue('ite');
-            component.dropdown.show();
-
-            fixture.detectChanges();
-            tick();
-
-            expect(component.dropdown.items.length).toEqual(2);
-            component.dropdown.dropdown.hide();
-
-            component.setInputValue('ita');
-            component.dropdown.show();
-
-            fixture.detectChanges();
-            tick();
-
-            expect(component.dropdown.items.length).toEqual(1);
-
-            discardPeriodicTasks();
-        }));
-
-        it('adds items to tag input from autocomplete', fakeAsync(() => {
-            const fixture: ComponentFixture<JTagInputComponentWithAutocomplete> =
-                TestBed.createComponent(JTagInputComponentWithAutocomplete);
-            const component = getComponent(fixture);
-
-            expect(component.dropdown).toBeDefined();
-
-            // press 'i'
-            component.setInputValue('i');
-            component.dropdown.show();
-            fixture.detectChanges();
-            tick();
-
-            const dropdown = component.dropdown.dropdown;
-            const item = dropdown.menu.items.first;
-            dropdown.menu.state.dropdownState.onItemClicked.emit(item);
-
-            tick();
-
-            expect(component.items.length).toEqual(3);
-            discardPeriodicTasks();
-        }));
-
         it('does not let add item if onlyFromAutocomplete is set to true', fakeAsync(() => {
             const fixture: ComponentFixture<JTagInputComponentWithOnlyAutocomplete> =
                 TestBed.createComponent(JTagInputComponentWithOnlyAutocomplete);
@@ -525,32 +444,7 @@ describe('JTagInputComponent', () => {
 
             discardPeriodicTasks();
         }));
-
-        it('should not add an item on blur if the dropdown is visible', fakeAsync(() => {
-            let keyUp: Event = new Event('keyUp');
-            (<any>keyUp)['keyCode'] = 73;
-
-            const fixture: ComponentFixture<JTagInputComponentWithAddOnBlur> =
-                TestBed.createComponent(JTagInputComponentWithAddOnBlur);
-
-            const component: JTagInputComponent = getComponent(fixture);
-
-            component.setInputValue('i');
-            // component.dropdown.show();
-
-            fixture.detectChanges();
-            tick();
-
-           // expect(component.dropdown.isVisible).toEqual(true);
-
-            component.inputForm.onBlur.emit();
-
-            expect(component.items.length).toEqual(2);
-
-            discardPeriodicTasks();
-        }));
     });
-
     describe('when using hooks onAdding and onRemoving', () => {
         let fixture: ComponentFixture<JTagInputComponentWithHooks>;
 
