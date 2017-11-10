@@ -1,6 +1,6 @@
 {
   "name": "skyux-lib-j-tags",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Single-page-application for skyux-lib-j-tags",
   "main": "bundles/bundle.umd.js",
   "module": "index.ts",
