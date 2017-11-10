@@ -2,13 +2,10 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HighlightPipe, DragProvider, Options, OptionsProvider } from '../../core';
-
-import {
-    JTagComponent,
-    JTagInputComponent,
-    JTagInputFormComponent,
-    JTagRippleComponent
-} from '../';
+import { JTagComponent } from '../j-tag';
+import { JTagInputFormComponent } from '../j-tag-input-form';
+import { JTagRippleComponent } from '../j-tag/j-tag-ripple.component';
+import { JTagInputComponent } from './';
 
 const COMPONENTS = [
     JTagInputComponent,

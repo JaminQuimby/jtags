@@ -4,7 +4,7 @@ import { JTagInputModule } from './public/src/modules/components/j-tag-input/j-t
 
 // Specify entry components, module-level providers, etc. here.
 @NgModule({
-  imports: [JTagInputModule],
+  imports: [  JTagInputModule],
   exports: [
     JTagInputModule
   ],
