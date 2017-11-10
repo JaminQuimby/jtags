@@ -5,11 +5,8 @@
 
   <h3>
     Demo:
-  </h3>
+  </h3> 
 
-
-    <j-tag-demo #jtag>
-      <input
-      [jTagInputData]="jtag" value="test"/>
-    </j-tag-demo>
+  <h3>Simple Input with two items</h3>
+  <j-tag-input (ngModel)="['Javascript', 'Typescript']" [modelAsStrings]="true"></j-tag-input>
 </div>
