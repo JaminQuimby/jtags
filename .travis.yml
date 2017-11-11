@@ -20,6 +20,8 @@ before_install:
 - sudo dpkg -i google-chrome*.deb
 - rm google-chrome*.deb
 - npm install -g @blackbaud/skyux-cli
+script:
+  - npm test
 after_success:
 - skyux build-public-library
 before_deploy:
